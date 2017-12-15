@@ -53,7 +53,10 @@ namespace Facebook
                         while (true)
                         {
                             int bytesRead = input.Read(buffer, 0, buffer.Length);
-                            input.Flush();
+
+                            // Fix for https://github.com/facebook-csharp-sdk/facebook-csharp-sdk/issues/333 - Error getting response stream (ReadDone2): ReceiveFailure 
+                            // input.Flush();
+
                             if (bytesRead <= 0) break;
                             stream.Write(buffer, 0, bytesRead);
                             stream.Flush();
